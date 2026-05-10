@@ -8,7 +8,8 @@
     "PlayerMixin"
   ],
   "client": [
-    "MinecraftClientMixin"
+    "MinecraftClientMixin",
+    "LocalPlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

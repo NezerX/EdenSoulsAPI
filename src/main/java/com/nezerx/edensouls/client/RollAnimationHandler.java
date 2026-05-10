@@ -1,6 +1,7 @@
 package com.nezerx.edensouls.client;
 
 import com.nezerx.edensouls.EdenSouls;
+import com.nezerx.edensouls.ModSounds;
 import com.nezerx.edensouls.roll.RollType;
 import dev.kosmx.playerAnim.api.layered.KeyframeAnimationPlayer;
 import dev.kosmx.playerAnim.api.layered.ModifierLayer;
@@ -37,6 +38,19 @@ public class RollAnimationHandler {
             EdenSouls.LOGGER.warn("Animation not found: {}", animId);
             return;
         }
+
+        // Звук — проверяем броню
+        boolean hasArmor =
+                !player.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.HEAD).isEmpty()  ||
+                        !player.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.CHEST).isEmpty() ||
+                        !player.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.LEGS).isEmpty()  ||
+                        !player.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.FEET).isEmpty();
+
+        net.minecraft.sounds.SoundEvent sound = hasArmor
+                ? ModSounds.ROLL_ARMOR.get()
+                : ModSounds.ROLL.get();
+
+        player.playSound(sound, 1.0f, 1.0f);
 
         var data = PlayerAnimationAccess.getPlayerAssociatedData(player);
         if (data.get(LAYER_ID) instanceof ModifierLayer<?> rawLayer) {

@@ -1,9 +1,9 @@
 package com.nezerx.edensouls.mixin;
 
-import com.nezerx.edensouls.EdenSouls;
 import com.nezerx.edensouls.KeyBindings;
 import com.nezerx.edensouls.client.RollAnimationHandler;
 import com.nezerx.edensouls.config.RollConfig;
+import com.nezerx.edensouls.roll.RollDirectionProvider;
 import com.nezerx.edensouls.roll.RollManager;
 import com.nezerx.edensouls.roll.RollingEntity;
 import net.minecraft.client.Minecraft;
@@ -55,7 +55,6 @@ public abstract class MinecraftClientMixin {
     }
 
     private void tryRolling() {
-
         Minecraft client = (Minecraft) (Object) this;
         if (this.player == null || client.isPaused() || client.screen != null) return;
 
@@ -75,14 +74,20 @@ public abstract class MinecraftClientMixin {
 
         Vec3 direction;
         if (forward == 0.0f && sideways == 0.0f) {
+            // Если стоим — перекат вперёд относительно камеры
             direction = new Vec3(0.0, 0.0, 1.0);
         } else {
             direction = new Vec3(sideways, 0.0, forward).normalize();
         }
 
+        // Переводим в мировые координаты
         direction = direction.yRot((float) Math.toRadians(-1.0 * this.player.getYRot()));
 
-        // скорость = расстояние / время анимации, применяем за один тик как импульс
+        // Угол направления движения для фиксации модели
+        float directionYRot = (float) Math.toDegrees(Math.atan2(-direction.x, direction.z));
+        ((RollDirectionProvider) this.player).edensouls$setRollDirectionYRot(directionYRot);
+
+        // Скорость = расстояние / время анимации
         RollConfig.RollTypeConfig cfg = RollConfig.get().getConfig(rollManager.getRollType());
         double speed = cfg.distance_blocks / cfg.animation_ticks;
         direction = direction.scale(speed);

@@ -1,0 +1,8 @@
+{
+  "roll": {
+    "sounds": ["edensouls:roll"]
+  },
+  "roll_armor": {
+    "sounds": ["edensouls:roll_armor"]
+  }
+}
