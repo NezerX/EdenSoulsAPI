@@ -87,7 +87,7 @@ public abstract class MinecraftClientMixin {
         float directionYRot = (float) Math.toDegrees(Math.atan2(-direction.x, direction.z));
         ((RollDirectionProvider) this.player).edensouls$setRollDirectionYRot(directionYRot);
 
-        // Скорость = расстояние / время анимации
+        // Скорость = расстояние / время анимации.
         RollConfig.RollTypeConfig cfg = RollConfig.get().getConfig(rollManager.getRollType());
         double speed = cfg.distance_blocks / cfg.animation_ticks;
         direction = direction.scale(speed);
