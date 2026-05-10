@@ -1,0 +1,27 @@
+package com.nezerx.edensouls.network;
+
+import com.nezerx.edensouls.EdenSouls;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
+
+public class NetworkHandler {
+
+    private static final String PROTOCOL = "1";
+    public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
+            new ResourceLocation(EdenSouls.MOD_ID, "main"),
+            () -> PROTOCOL,
+            PROTOCOL::equals,
+            PROTOCOL::equals
+    );
+
+    public static void register() {
+        CHANNEL.registerMessage(0, SyncRollTypePacket.class,
+                SyncRollTypePacket::encode,
+                SyncRollTypePacket::decode,
+                SyncRollTypePacket::handle,
+                java.util.Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+    }
+}
