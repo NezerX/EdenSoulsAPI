@@ -23,5 +23,11 @@ public class NetworkHandler {
                 SyncRollTypePacket::handle,
                 java.util.Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
+        CHANNEL.registerMessage(1, ServerboundRollPacket.class,
+                ServerboundRollPacket::encode,
+                ServerboundRollPacket::decode,
+                ServerboundRollPacket::handle,
+                java.util.Optional.of(NetworkDirection.PLAY_TO_SERVER)
+        );
     }
 }

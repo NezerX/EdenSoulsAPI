@@ -85,7 +85,7 @@ dependencies {
     implementation fg.deobf("maven.modrinth:playeranimator:xe2EVE6q")
     implementation fg.deobf("maven.modrinth:cloth-config:t8TXrZvZ")
     implementation fg.deobf("maven.modrinth:geckolib:HVdLnQMI")
-
+    implementation fg.deobf("maven.modrinth:peak-stamina:r4K54eho")
 }
 
 tasks.named('processResources', ProcessResources).configure {

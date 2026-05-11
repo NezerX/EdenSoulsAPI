@@ -2,11 +2,12 @@ package com.nezerx.edensoulsapi.roll;
 
 import com.nezerx.edensoulsapi.config.RollConfig;
 import com.nezerx.edensoulsapi.config.RollConfig.RollTypeConfig;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 public class RollManager {
-
+    private static final org.slf4j.Logger LOGGER = com.mojang.logging.LogUtils.getLogger();
     private RollType rollType = RollType.NORMAL;
     private int movementTicks = 0;
     private boolean rolling = false;
@@ -40,7 +41,23 @@ public class RollManager {
     }
 
     public boolean isRollAvailable(Player player) {
-        return !rolling && cooldownTicks <= 0;
+        if (rolling || cooldownTicks > 0) return false;
+
+        if (player instanceof ServerPlayer serverPlayer) {
+            if (net.minecraftforge.fml.ModList.get().isLoaded("peakstamina")) {
+                try {
+                    Class<?> compat = Class.forName(
+                            "com.nezerx.edensoulsapi.compat.PeakStaminaCompat"
+                    );
+                    boolean hasStamina = (boolean) compat
+                            .getMethod("hasEnoughStamina", ServerPlayer.class)
+                            .invoke(null, serverPlayer);
+                    if (!hasStamina) return false;
+                } catch (Exception ignored) {}
+            }
+        }
+
+        return true;
     }
 
     public int getCooldownTicks() {
@@ -60,7 +77,6 @@ public class RollManager {
         cooldownTicks = ROLL_COOLDOWN;
         rollVelocity = velocity;
 
-        // i-frames для normal и no_roll стартуют сразу
         if (startupTicks <= 0 && rollType != RollType.FAT_ROLL) {
             invulnerable = iframeTicks > 0;
         }

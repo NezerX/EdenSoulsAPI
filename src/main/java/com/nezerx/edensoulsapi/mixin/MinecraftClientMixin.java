@@ -3,6 +3,8 @@ package com.nezerx.edensoulsapi.mixin;
 import com.nezerx.edensoulsapi.KeyBindings;
 import com.nezerx.edensoulsapi.client.RollAnimationHandler;
 import com.nezerx.edensoulsapi.config.RollConfig;
+import com.nezerx.edensoulsapi.network.NetworkHandler;
+import com.nezerx.edensoulsapi.network.ServerboundRollPacket;
 import com.nezerx.edensoulsapi.roll.RollDirectionProvider;
 import com.nezerx.edensoulsapi.roll.RollManager;
 import com.nezerx.edensoulsapi.roll.RollingEntity;
@@ -69,30 +71,40 @@ public abstract class MinecraftClientMixin {
         if (this.player.getVehicle() != null) return;
         if (this.player.isUsingItem() || this.player.isBlocking()) return;
 
+        // Проверка стамины Peak Stamina на клиенте
+        if (net.minecraftforge.fml.ModList.get().isLoaded("peakstamina")) {
+            try {
+                Class<?> compat = Class.forName(
+                        "com.nezerx.edensoulsapi.compat.PeakStaminaCompat"
+                );
+                boolean hasStamina = (boolean) compat
+                        .getMethod("hasEnoughStamina", net.minecraft.world.entity.player.Player.class)
+                        .invoke(null, this.player);
+                if (!hasStamina) return;
+            } catch (Exception ignored) {}
+        }
+
         float forward = this.player.input.forwardImpulse;
         float sideways = this.player.input.leftImpulse;
 
         Vec3 direction;
         if (forward == 0.0f && sideways == 0.0f) {
-            // Если стоим — перекат вперёд относительно камеры
             direction = new Vec3(0.0, 0.0, 1.0);
         } else {
             direction = new Vec3(sideways, 0.0, forward).normalize();
         }
 
-        // Переводим в мировые координаты
         direction = direction.yRot((float) Math.toRadians(-1.0 * this.player.getYRot()));
 
-        // Угол направления движения для фиксации модели
         float directionYRot = (float) Math.toDegrees(Math.atan2(-direction.x, direction.z));
         ((RollDirectionProvider) this.player).edensouls$setRollDirectionYRot(directionYRot);
 
-        // Скорость = расстояние / время анимации.
         RollConfig.RollTypeConfig cfg = RollConfig.get().getConfig(rollManager.getRollType());
         double speed = cfg.distance_blocks / cfg.animation_ticks;
         direction = direction.scale(speed);
 
         rollManager.onRoll(this.player, direction);
+        NetworkHandler.CHANNEL.sendToServer(new ServerboundRollPacket(direction));
         RollAnimationHandler.playAnimation((AbstractClientPlayer) this.player, rollManager.getRollType());
     }
 }

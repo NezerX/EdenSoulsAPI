@@ -44,5 +44,12 @@ versionRange=">=11.1.136"
 ordering="NONE"
 side="BOTH"
 
+[[dependencies.edensoulsapi]]
+modId="peakstamina"
+mandatory=false
+versionRange="*"
+ordering="NONE"
+side="BOTH"
+
 [[mixins]]
 config="edensouls.mixins.json"

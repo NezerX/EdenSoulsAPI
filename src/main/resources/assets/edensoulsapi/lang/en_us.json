@@ -1,4 +1,4 @@
 {
-  "effect.edensouls.stun": "Stun",
-  "effect.edensouls.full_stun": "Full Stun"
+  "key.categories.edensoulsapi": "EdenSouls API",
+  "key.edesoulsapi.roll": "Roll"
 }
