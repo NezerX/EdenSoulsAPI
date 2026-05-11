@@ -1,7 +1,7 @@
-package com.nezerx.edensouls.roll;
+package com.nezerx.edensoulsapi.roll;
 
-import com.nezerx.edensouls.config.RollConfig;
-import com.nezerx.edensouls.config.RollConfig.RollTypeConfig;
+import com.nezerx.edensoulsapi.config.RollConfig;
+import com.nezerx.edensoulsapi.config.RollConfig.RollTypeConfig;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 

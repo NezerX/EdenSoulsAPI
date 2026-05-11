@@ -1,14 +1,14 @@
-package com.nezerx.edensouls.client;
+package com.nezerx.edensoulsapi.client;
 
-import com.nezerx.edensouls.EdenSouls;
-import com.nezerx.edensouls.KeyBindings;
+import com.nezerx.edensoulsapi.EdenSoulsAPI;
+import com.nezerx.edensoulsapi.KeyBindings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-@Mod.EventBusSubscriber(modid = EdenSouls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = EdenSoulsAPI.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class EdenSoulsClient {
 
     @SubscribeEvent

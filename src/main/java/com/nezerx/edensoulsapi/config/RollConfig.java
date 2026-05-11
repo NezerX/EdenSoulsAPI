@@ -1,13 +1,12 @@
-package com.nezerx.edensouls.config;
+package com.nezerx.edensoulsapi.config;
 
-import com.nezerx.edensouls.roll.RollType;
+import com.nezerx.edensoulsapi.roll.RollType;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 
-@Config(name = "edensouls")
+@Config(name = "edensoulsapi")
 public class RollConfig implements ConfigData {
 
     @ConfigEntry.Category("general")

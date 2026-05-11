@@ -30,5 +30,19 @@ versionRange=">=4.8.3"
 ordering="NONE"
 side="BOTH"
 
+[[dependencies.${mod_id}]]
+modId="playeranimator"
+mandatory=true
+versionRange=">=1.0.2"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.${mod_id}]]
+modId="clothconfig"
+mandatory=false
+versionRange=">=11.1.136"
+ordering="NONE"
+side="BOTH"
+
 [[mixins]]
 config="edensouls.mixins.json"

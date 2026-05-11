@@ -1,4 +1,4 @@
-package com.nezerx.edensouls;
+package com.nezerx.edensoulsapi;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
@@ -7,10 +7,10 @@ import org.lwjgl.glfw.GLFW;
 
 public class KeyBindings {
     public static final KeyMapping ROLL = new KeyMapping(
-            "key.edensouls.roll",
+            "key.edensoulsapi.roll",
             KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_LEFT_ALT,
-            "key.categories.edensouls"
+            "key.categories.edensoulsapi"
     );
 }

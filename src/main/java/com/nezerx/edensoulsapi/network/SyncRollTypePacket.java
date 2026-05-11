@@ -1,8 +1,8 @@
-package com.nezerx.edensouls.network;
+package com.nezerx.edensoulsapi.network;
 
-import com.nezerx.edensouls.roll.RollManager;
-import com.nezerx.edensouls.roll.RollType;
-import com.nezerx.edensouls.roll.RollingEntity;
+import com.nezerx.edensoulsapi.roll.RollManager;
+import com.nezerx.edensoulsapi.roll.RollType;
+import com.nezerx.edensoulsapi.roll.RollingEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;

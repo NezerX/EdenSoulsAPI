@@ -1,8 +1,8 @@
-package com.nezerx.edensouls.client;
+package com.nezerx.edensoulsapi.client;
 
-import com.nezerx.edensouls.EdenSouls;
-import com.nezerx.edensouls.ModSounds;
-import com.nezerx.edensouls.roll.RollType;
+import com.nezerx.edensoulsapi.EdenSoulsAPI;
+import com.nezerx.edensoulsapi.ModSounds;
+import com.nezerx.edensoulsapi.roll.RollType;
 import dev.kosmx.playerAnim.api.layered.KeyframeAnimationPlayer;
 import dev.kosmx.playerAnim.api.layered.ModifierLayer;
 import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
@@ -13,10 +13,10 @@ import net.minecraft.resources.ResourceLocation;
 
 public class RollAnimationHandler {
 
-    private static final ResourceLocation ANIM_NORMAL = new ResourceLocation(EdenSouls.MOD_ID, "roll_normal");
-    private static final ResourceLocation ANIM_FAT    = new ResourceLocation(EdenSouls.MOD_ID, "roll_fat");
-    private static final ResourceLocation ANIM_NO     = new ResourceLocation(EdenSouls.MOD_ID, "roll_no");
-    public  static final ResourceLocation LAYER_ID    = new ResourceLocation(EdenSouls.MOD_ID, "roll_layer");
+    private static final ResourceLocation ANIM_NORMAL = new ResourceLocation(EdenSoulsAPI.MOD_ID, "roll_normal");
+    private static final ResourceLocation ANIM_FAT    = new ResourceLocation(EdenSoulsAPI.MOD_ID, "roll_fat");
+    private static final ResourceLocation ANIM_NO     = new ResourceLocation(EdenSoulsAPI.MOD_ID, "roll_no");
+    public  static final ResourceLocation LAYER_ID    = new ResourceLocation(EdenSoulsAPI.MOD_ID, "roll_layer");
 
     public static void registerLayer() {
         PlayerAnimationAccess.REGISTER_ANIMATION_EVENT.register((player, animationStack) -> {
@@ -35,7 +35,7 @@ public class RollAnimationHandler {
 
         KeyframeAnimation animData = PlayerAnimationRegistry.getAnimation(animId);
         if (animData == null) {
-            EdenSouls.LOGGER.warn("Animation not found: {}", animId);
+            EdenSoulsAPI.LOGGER.warn("Animation not found: {}", animId);
             return;
         }
 

@@ -1,6 +1,6 @@
-package com.nezerx.edensouls.network;
+package com.nezerx.edensoulsapi.network;
 
-import com.nezerx.edensouls.EdenSouls;
+import com.nezerx.edensoulsapi.EdenSoulsAPI;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
@@ -10,7 +10,7 @@ public class NetworkHandler {
 
     private static final String PROTOCOL = "1";
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-            new ResourceLocation(EdenSouls.MOD_ID, "main"),
+            new ResourceLocation(EdenSoulsAPI.MOD_ID, "main"),
             () -> PROTOCOL,
             PROTOCOL::equals,
             PROTOCOL::equals

@@ -1,9 +1,9 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.nezerx.edensouls.mixin",
+  "package": "com.nezerx.edensoulsapi.mixin",
   "compatibilityLevel": "JAVA_17",
-  "refmap": "edensouls.refmap.json",
+  "refmap": "edensoulsapi.refmap.json",
   "mixins": [
     "PlayerMixin"
   ],

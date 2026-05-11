@@ -1,12 +1,12 @@
-package com.nezerx.edensouls.command;
+package com.nezerx.edensoulsapi.command;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
-import com.nezerx.edensouls.EdenSouls;
-import com.nezerx.edensouls.network.NetworkHandler;
-import com.nezerx.edensouls.network.SyncRollTypePacket;
-import com.nezerx.edensouls.roll.RollManager;
-import com.nezerx.edensouls.roll.RollType;
-import com.nezerx.edensouls.roll.RollingEntity;
+import com.nezerx.edensoulsapi.EdenSoulsAPI;
+import com.nezerx.edensoulsapi.network.NetworkHandler;
+import com.nezerx.edensoulsapi.network.SyncRollTypePacket;
+import com.nezerx.edensoulsapi.roll.RollManager;
+import com.nezerx.edensoulsapi.roll.RollType;
+import com.nezerx.edensoulsapi.roll.RollingEntity;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -16,7 +16,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 
-@Mod.EventBusSubscriber(modid = EdenSouls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = EdenSoulsAPI.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class RollCommand {
 
     @SubscribeEvent

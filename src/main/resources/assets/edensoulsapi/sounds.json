@@ -1,0 +1,8 @@
+{
+  "roll": {
+    "sounds": ["edensoulsapi:roll"]
+  },
+  "roll_armor": {
+    "sounds": ["edensoulsapi:roll_armor"]
+  }
+}

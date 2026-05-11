@@ -1,11 +1,11 @@
-package com.nezerx.edensouls.mixin;
+package com.nezerx.edensoulsapi.mixin;
 
-import com.nezerx.edensouls.KeyBindings;
-import com.nezerx.edensouls.client.RollAnimationHandler;
-import com.nezerx.edensouls.config.RollConfig;
-import com.nezerx.edensouls.roll.RollDirectionProvider;
-import com.nezerx.edensouls.roll.RollManager;
-import com.nezerx.edensouls.roll.RollingEntity;
+import com.nezerx.edensoulsapi.KeyBindings;
+import com.nezerx.edensoulsapi.client.RollAnimationHandler;
+import com.nezerx.edensoulsapi.config.RollConfig;
+import com.nezerx.edensoulsapi.roll.RollDirectionProvider;
+import com.nezerx.edensoulsapi.roll.RollManager;
+import com.nezerx.edensoulsapi.roll.RollingEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;

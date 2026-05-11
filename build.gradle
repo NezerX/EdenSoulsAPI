@@ -139,6 +139,6 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 mixin {
-    add sourceSets.main, "edensouls.refmap.json"
-    config "edensouls.mixins.json"
+    add sourceSets.main, "edensoulsapi.refmap.json"
+    config "edensoulsapi.mixins.json"
 }
