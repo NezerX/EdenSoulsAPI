@@ -86,6 +86,7 @@ dependencies {
     implementation fg.deobf("maven.modrinth:cloth-config:t8TXrZvZ")
     implementation fg.deobf("maven.modrinth:geckolib:HVdLnQMI")
     implementation fg.deobf("maven.modrinth:peak-stamina:r4K54eho")
+    compileOnly fg.deobf(files("libs/edensouls.jar"))
 }
 
 tasks.named('processResources', ProcessResources).configure {

@@ -40,6 +40,11 @@ public class ServerboundRollPacket {
             Vec3 direction = new Vec3(packet.dirX, 0, packet.dirZ);
             rollManager.onRoll(player, direction);
 
+            NetworkHandler.CHANNEL.send(
+                    net.minecraftforge.network.PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player),
+                    new ClientboundRollAnimationPacket(player.getUUID(), rollManager.getRollType())
+            );
+
             // Peak Stamina — списываем стамину
             if (net.minecraftforge.fml.ModList.get().isLoaded("peakstamina")) {
                 try {

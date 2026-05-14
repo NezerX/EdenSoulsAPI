@@ -29,5 +29,11 @@ public class NetworkHandler {
                 ServerboundRollPacket::handle,
                 java.util.Optional.of(NetworkDirection.PLAY_TO_SERVER)
         );
+        CHANNEL.registerMessage(2, ClientboundRollAnimationPacket.class,
+                ClientboundRollAnimationPacket::encode,
+                ClientboundRollAnimationPacket::decode,
+                ClientboundRollAnimationPacket::handle,
+                java.util.Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
     }
 }

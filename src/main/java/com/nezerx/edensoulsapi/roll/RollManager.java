@@ -5,8 +5,14 @@ import com.nezerx.edensoulsapi.config.RollConfig.RollTypeConfig;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffect;
 
 public class RollManager {
+
+    private static final String[] DEFAULT_BLOCKING_EFFECTS =
+            {"edensouls:stun", "edensouls:full_stun"};
     private static final org.slf4j.Logger LOGGER = com.mojang.logging.LogUtils.getLogger();
     private RollType rollType = RollType.NORMAL;
     private int movementTicks = 0;
@@ -44,8 +50,22 @@ public class RollManager {
         return invulnerable;
     }
 
+    public static boolean isBlockedByEffect(Player player) {
+        String[] ids = RollConfig.get().roll_blocking_effects;
+        if (ids == null) ids = DEFAULT_BLOCKING_EFFECTS;
+        for (String id : ids) {
+            ResourceLocation rl = ResourceLocation.tryParse(id);
+            if (rl == null) continue;
+            MobEffect effect = BuiltInRegistries.MOB_EFFECT.get(rl);
+            if (effect != null && player.hasEffect(effect)) return true;
+        }
+        return false;
+    }
+
     public boolean isRollAvailable(Player player) {
         if (rolling || cooldownTicks > 0) return false;
+
+        if (isBlockedByEffect(player)) return false;
 
         if (player instanceof ServerPlayer serverPlayer) {
             if (net.minecraftforge.fml.ModList.get().isLoaded("peakstamina")) {
@@ -92,6 +112,17 @@ public class RollManager {
     // ── тик ───────────────────────────────────────────────────────
 
     public void tick(Player player) {
+
+        if (rolling && isBlockedByEffect(player)) {
+            rolling = false;
+            invulnerable = false;
+            animationTicks = 0;
+            movementTicks = 0;
+            iframeTicks = 0;
+            startupTicks = 0;
+            rollVelocity = Vec3.ZERO;
+        }
+
         if (rolling) {
             // задержка fat_roll
             if (startupTicks > 0) {

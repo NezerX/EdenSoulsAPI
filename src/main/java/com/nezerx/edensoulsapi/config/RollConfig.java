@@ -30,6 +30,8 @@ public class RollConfig implements ConfigData {
     @ConfigEntry.Category("no_roll")
     public RollTypeConfig no_roll = new RollTypeConfig(28, 28, 0, 10, 0.5);
 
+    @ConfigEntry.Category("general")
+    public String[] roll_blocking_effects = {"edensouls:stun", "edensouls:full_stun"};
     public RollTypeConfig getConfig(RollType type) {
         return switch (type) {
             case NORMAL -> normal;
@@ -44,6 +46,7 @@ public class RollConfig implements ConfigData {
         public int iframes;
         public int startup_delay;
         public double distance_blocks;
+
         public RollTypeConfig() {}
         public RollTypeConfig(int animation_ticks, int movement_ticks, int iframes, int startup_delay, double distance_blocks) {
             this.animation_ticks = animation_ticks;
