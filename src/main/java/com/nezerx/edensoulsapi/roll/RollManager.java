@@ -22,6 +22,10 @@ public class RollManager {
 
     private static final int ROLL_COOLDOWN = 20;
 
+    public int getStartupTicks() {
+        return startupTicks;
+    }
+
     // ── публичное API ──────────────────────────────────────────────
 
     public void setRollType(RollType type) {
@@ -75,7 +79,10 @@ public class RollManager {
         iframeTicks = cfg.iframes;
         startupTicks = cfg.startup_delay;
         cooldownTicks = ROLL_COOLDOWN;
-        rollVelocity = velocity;
+
+
+        double speed = cfg.distance_blocks / cfg.movement_ticks;
+        rollVelocity = velocity.normalize().scale(speed);
 
         if (startupTicks <= 0 && rollType != RollType.FAT_ROLL) {
             invulnerable = iframeTicks > 0;

@@ -29,6 +29,30 @@ public abstract class LocalPlayerMixin extends LivingEntity implements RollDirec
         this.edensouls$lockedYHeadRot = yRot;
     }
 
+    @Inject(
+            method = "aiStep",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/tutorial/Tutorial;onInput(Lnet/minecraft/client/player/Input;)V",
+                    shift = At.Shift.AFTER
+            )
+    )
+    private void aiStep_afterInputTick(CallbackInfo ci) {
+        if (((RollingEntity) this).getRollManager().isRolling()) {
+            LocalPlayer self = (LocalPlayer) (Object) this;
+            self.input.forwardImpulse = 0f;
+            self.input.leftImpulse = 0f;
+            self.input.jumping = false;
+        }
+    }
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void tick_HEAD(CallbackInfo ci) {
+        if (((RollingEntity) this).getRollManager().isRolling()) {
+            this.jumping = false;
+        }
+    }
+
     @Inject(method = "tick", at = @At("TAIL"))
     private void tick_TAIL(CallbackInfo ci) {
         RollingEntity rolling = (RollingEntity) this;
@@ -43,6 +67,12 @@ public abstract class LocalPlayerMixin extends LivingEntity implements RollDirec
             this.yHeadRot = edensouls$lockedYHeadRot;
             this.yBodyRotO = edensouls$lockedYRot;
             this.yHeadRotO = edensouls$lockedYHeadRot;
+
+            LocalPlayer self = (LocalPlayer) (Object) this;
+            self.input.forwardImpulse = 0f;
+            self.input.leftImpulse = 0f;
+            self.input.jumping = false;
+
         } else {
             edensouls$wasRolling = false;
         }

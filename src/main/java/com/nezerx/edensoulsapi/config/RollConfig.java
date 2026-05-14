@@ -44,7 +44,7 @@ public class RollConfig implements ConfigData {
         public int iframes;
         public int startup_delay;
         public double distance_blocks;
-
+        public RollTypeConfig() {}
         public RollTypeConfig(int animation_ticks, int movement_ticks, int iframes, int startup_delay, double distance_blocks) {
             this.animation_ticks = animation_ticks;
             this.movement_ticks = movement_ticks;

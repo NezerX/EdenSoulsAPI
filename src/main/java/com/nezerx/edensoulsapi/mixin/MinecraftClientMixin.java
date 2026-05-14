@@ -100,7 +100,7 @@ public abstract class MinecraftClientMixin {
         ((RollDirectionProvider) this.player).edensouls$setRollDirectionYRot(directionYRot);
 
         RollConfig.RollTypeConfig cfg = RollConfig.get().getConfig(rollManager.getRollType());
-        double speed = cfg.distance_blocks / cfg.animation_ticks;
+        double speed = cfg.distance_blocks / cfg.movement_ticks;
         direction = direction.scale(speed);
 
         rollManager.onRoll(this.player, direction);
